@@ -13,6 +13,6 @@ Includes:
 - RGraph Chart Integration
 
 Made with assistance from:
--JQuery UI
--RGraph
--Uniform.js
+- JQuery UI
+- RGraph
+- Uniform.js

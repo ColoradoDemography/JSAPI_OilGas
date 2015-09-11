@@ -1,0 +1,152 @@
+#uniform-printbtns {
+	position: absolute;
+	bottom: 25px;
+	left: 18px;
+	line-height: 16px;
+}
+
+.map .logo-med {
+	bottom: 5px;
+	right: 10px;
+	width: 46px;
+	height: 22px;
+}
+
+td {
+	font-family: Copse, Georgia, serif;
+	font-size: 10pt;
+	vertical-align: middle;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+body {
+	font-family: Copse, Georgia, serif;
+}
+
+#title {
+	color: #4479aa;
+	font-family: Copse, Georgia, serif;
+	font-size: 28px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	letter-spacing: normal;
+	outline-color: #8f0206;
+	outline-style: none;
+	outline-width: 0;
+	text-decoration: none;
+	text-shadow: #fcf9ee 0 1px 0 rgba(0,0,0,0.14902) 0 2px 0;
+}
+
+#subtitle {
+	color: #203c55;
+	font-family: Copse, Georgia, serif;
+	outline-color: #8f0206;
+	outline-style: none;
+	outline-width: 0;
+	text-decoration: none;
+	text-shadow: #fcf9ee 0 1px 0 rgba(0,0,0,0.14902) 0 2px 0;
+}
+
+#loading {
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	z-index: 3000;
+}
+
+select, fieldset, form {
+	border-style: none !important;
+}
+
+#legendDiv path {
+	fill-opacity: 0.6 !important;
+}
+
+#legendDiv {
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	position: absolute !important;
+	right: 22px;
+	top: 154px;
+	z-index: 2000;
+	width: 175px;
+	background: #FFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #AAA;
+	font-size: 70%;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.esriLegendLayerLabel {
+	display: none;
+}
+
+.esriLegendService {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#search {
+	position: absolute;
+	z-index: 3000;
+	top: 115px;
+	right: 27px;
+}
+
+#uniform-abovebox2 span {
+	width: 85px;
+}
+
+#uniform-abovebox2 {
+	position: absolute;
+	z-index: 3005;
+	top: 55px;
+	right: 20px;
+	text-align: center;
+	cursor: pointer;
+	font-family: Copse, Georgia, serif;
+	color: #444;
+}
+
+#uniform-abovebox2 :hover {
+	color: #000;
+}
+
+#demo {
+	position: absolute;
+	z-index: 3000;
+	top: 55px;
+	right: 150px;
+}
+
+#speed {
+	width: 90px;
+}
+
+#radinput {
+	width: 200px;
+}
+
+#radform {
+	position: absolute;
+	z-index: 3100;
+	top: 21px;
+	right: 150px;
+}
+
+div.button span {
+	font-family: Copse, Georgia, serif;
+}
+
+#header {
+	border: solid 1px #999;
+}

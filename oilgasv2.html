@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" /> 
+    <title>Oil, Natural Gas &amp; CO2 Production</title>
+	
+	<link rel="icon" type="image/png" href="http://dola.colorado.gov/gis-cms/sites/default/files/gis-images/COfavicon2.png">
+    
+    <!-- this application was made with an older version of the javascript API, version 3.3.  The current version of the javascript API is at 3.14.  A version 4.0 is in beta 
+        loaded below are the style files for the esri javascript api -->
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
+    
+    
+    <!-- some style defaults for my ESRI Javascript API Maps -->
+    <link rel="stylesheet" href="http://dola.colorado.gov/gis-cms/sites/default/files/html/css/layout.css">
+
+	
+	<!-- The User Interface is made with a combination of JQueryUI and Uniform.js -->
+	<link rel="stylesheet" href="http://dola.colorado.gov/gis-cms/sites/default/files/ctools/uniform/themes/aristo/css/uniform.aristo.css" media="screen" />
+	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/html/js/jquery-1.9.1.js"></script>
+  <script src="http://dola.colorado.gov/gis-cms/sites/default/files/html/js/jquery-ui.js"></script>
+	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/ctools/uniform/jquery.uniform.min.js"></script>
+
+    
+  <!-- Source files for the RGraph Library, which the charts in the popups are created from -->  
+	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.core.js" ></script>
+  <script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.line.js" ></script>
+  <script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.dynamic.js" ></script>	
+	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.tooltips.js"></script>
+	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.effects.js" ></script>
+
+
+  <!-- CSS file that controls layouts for DOM elements unique to this application -->
+  <link rel="stylesheet" href="css/style.css">
+
+	<!-- not clear on the use of this - but code breaks without it.  -->
+	<script>
+    var dojoConfig = { parseOnLoad: true };
+	</script>
+	
+    
+    <!-- load main ESRI javascript library -->
+    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
+
+    <!-- load custom javascript code -->
+    <script src="js/oilgas.js"></script>
+
+		
+  </head>
+
+  <!-- 'claro' is a dojo style theme -->
+  <body class="claro">
+
+  <!-- this is a typical setup for an app.  I usually leave this alone. -->
+  <div id="mainWindow" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%;">
+
+      <div id="header" class="shadow roundedCorners" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top'" style="visibility: visible">
+
+        <div id="title"></div>
+        <div id="subtitle"></div>
+
+      </div>
+      <div id="mapDiv" class="roundedCorners shadow" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'"></div>
+
+  </div>
+	
+        
+    
+    <!-- all of my custom dom elements are typically appended on using absolute positioning with my custom css -->
+    
+    <!-- Statistics dropdown -->
+	<div id="radform">
+	<span>Statistic:</span>
+		<select id="radinput" onChange="midFunction();">
+			<option value="1" selected>Oil Production</option>
+			<option value="2">Natural Gas Production</option>
+			<option value="3">CO2 Production</option>
+			<option value="4">Number of Active Wells</option>
+		</select>
+	</div>
+
+<!-- Year dropdown -->
+	<div id="demo">
+		<span>Year:</span>
+		<select name="speedy" id="speed" onChange="midFunction();">
+			<option value="1999">1999</option>
+			<option value="2000">2000</option>
+			<option value="2001">2001</option>
+			<option value="2002">2002</option>
+			<option value="2003">2003</option>
+			<option value="2004">2004</option>
+			<option value="2005">2005</option>
+			<option value="2006">2006</option>
+			<option value="2007">2007</option>
+			<option value="2008">2008</option>
+			<option value="2009">2009</option>
+			<option value="2010">2010</option>
+			<option value="2011">2011</option>
+			<option value="2012" selected>2012</option>
+		</select>
+	</div>
+
+	  <!-- searchbox appended onto map using css -->
+	<div id="search"></div>
+	
+    <!-- legend appended onto map using css -->
+	<div id="legendDiv"  style="display:none;"></div>
+
+    
+    <!-- loading animation shown at start of a tast and hidden when task completed.  begins on -->
+	<div id="loading"><img src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/unemployment/loading-animation.gif" alt="Please Wait" width="100" height="100"></div>
+	
+    
+    <!-- legend button appended onto map using css.  pressing it toggles display of legendDiv -->
+	<div id="uniform-abovebox2" class="button" onmouseover="$(this).addClass('hover');"  onmouseout="$(this).removeClass('hover');" style="-moz-user-select: none;"  onclick="$('#legendDiv').toggle();"><span>Legend</span></div>
+
+	<!-- canvas container that contains RGraph chart -->
+			<div id="canvascontainer" style="margin-top:0px;"><canvas id='cvs' width='315' height='155'>[No canvas support]</canvas><p id="pos_ab" style="font-size: 80%; margin-bottom:2px; display:none;">Chart: <a href="http://www.rgraph.net" target="_blank">RGraph</a></p></div>
+
+    <!-- print button in lower left corner of map.  appended using css -->
+<div id="uniform-printbtns" class="button" onmouseover="$(this).addClass('hover');"  onmouseout="$(this).removeClass('hover');"style="-moz-user-select: none;"  onclick="javascript:Clickhereformap('uniform-printbtns');"><span id='printspan'>Print Map</span></div>
+			
+  </body>
+</html>

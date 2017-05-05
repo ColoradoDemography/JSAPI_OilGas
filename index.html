@@ -2,32 +2,32 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
     <title>Oil, Natural Gas &amp; CO2 Production</title>
-	
+
 	<link rel="icon" type="image/png" href="http://dola.colorado.gov/gis-cms/sites/default/files/gis-images/COfavicon2.png">
-    
-    <!-- this application was made with an older version of the javascript API, version 3.3.  The current version of the javascript API is at 3.14.  A version 4.0 is in beta 
+
+    <!-- this application was made with an older version of the javascript API, version 3.3.  The current version of the javascript API is at 3.14.  A version 4.0 is in beta
         loaded below are the style files for the esri javascript api -->
     <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/claro/claro.css">
     <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
-    
-    
+
+
     <!-- some style defaults for my ESRI Javascript API Maps -->
     <link rel="stylesheet" href="http://dola.colorado.gov/gis-cms/sites/default/files/html/css/layout.css">
 
-	
+
 	<!-- The User Interface is made with a combination of JQueryUI and Uniform.js -->
 	<link rel="stylesheet" href="http://dola.colorado.gov/gis-cms/sites/default/files/ctools/uniform/themes/aristo/css/uniform.aristo.css" media="screen" />
 	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/html/js/jquery-1.9.1.js"></script>
   <script src="http://dola.colorado.gov/gis-cms/sites/default/files/html/js/jquery-ui.js"></script>
 	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/ctools/uniform/jquery.uniform.min.js"></script>
 
-    
-  <!-- Source files for the RGraph Library, which the charts in the popups are created from -->  
+
+  <!-- Source files for the RGraph Library, which the charts in the popups are created from -->
 	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.core.js" ></script>
   <script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.line.js" ></script>
-  <script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.dynamic.js" ></script>	
+  <script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.dynamic.js" ></script>
 	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.tooltips.js"></script>
 	<script src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/RGraph/libraries/RGraph.common.effects.js" ></script>
 
@@ -39,15 +39,23 @@
 	<script>
     var dojoConfig = { parseOnLoad: true };
 	</script>
-	
-    
+
+
     <!-- load main ESRI javascript library -->
     <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
 
     <!-- load custom javascript code -->
     <script src="js/oilgas.js"></script>
 
-		
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-76100845-1', 'auto');
+    ga('set', 'anonymizeIp', true);
+    ga('send', 'pageview');
+    </script>	
   </head>
 
   <!-- 'claro' is a dojo style theme -->
@@ -65,11 +73,11 @@
       <div id="mapDiv" class="roundedCorners shadow" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'"></div>
 
   </div>
-	
-        
-    
+
+
+
     <!-- all of my custom dom elements are typically appended on using absolute positioning with my custom css -->
-    
+
     <!-- Statistics dropdown -->
 	<div id="radform">
 	<span>Statistic:</span>
@@ -104,15 +112,15 @@
 
 	  <!-- searchbox appended onto map using css -->
 	<div id="search"></div>
-	
+
     <!-- legend appended onto map using css -->
 	<div id="legendDiv"  style="display:none;"></div>
 
-    
+
     <!-- loading animation shown at start of a tast and hidden when task completed.  begins on -->
 	<div id="loading"><img src="http://dola.colorado.gov/gis-cms/sites/default/files/projects/unemployment/loading-animation.gif" alt="Please Wait" width="100" height="100"></div>
-	
-    
+
+
     <!-- legend button appended onto map using css.  pressing it toggles display of legendDiv -->
 	<div id="uniform-abovebox2" class="button" onmouseover="$(this).addClass('hover');"  onmouseout="$(this).removeClass('hover');" style="-moz-user-select: none;"  onclick="$('#legendDiv').toggle();"><span>Legend</span></div>
 
@@ -121,6 +129,6 @@
 
     <!-- print button in lower left corner of map.  appended using css -->
 <div id="uniform-printbtns" class="button" onmouseover="$(this).addClass('hover');"  onmouseout="$(this).removeClass('hover');"style="-moz-user-select: none;"  onclick="javascript:Clickhereformap('uniform-printbtns');"><span id='printspan'>Print Map</span></div>
-			
+
   </body>
 </html>

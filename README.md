@@ -11,6 +11,7 @@ Includes:
 - Legend
 - Search
 - RGraph Chart Integration
+- Other Fun Daniel Things
 
 Made with assistance from:
 - JQuery UI
